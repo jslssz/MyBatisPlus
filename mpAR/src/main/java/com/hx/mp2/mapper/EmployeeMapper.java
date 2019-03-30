@@ -1,7 +1,7 @@
-package com.hx.mp.mapper;
+package com.hx.mp2.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.hx.mp.bean.Employee;
+import com.hx.mp2.bean.Employee;
 
 /**
  * Created  on 2019/03/28.

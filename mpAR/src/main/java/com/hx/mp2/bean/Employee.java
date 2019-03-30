@@ -1,20 +1,19 @@
-package com.hx.mp.bean;
+package com.hx.mp2.bean;
 
+import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
+
+import java.io.Serializable;
 
 /**
  * Created  on 2019/03/28.
  */
 
-//@TableName("tbl_employee ")  xml 配置表前缀，结合实体类型
 
-public class Employee {
 
-    //@TableId(value = "id",type = IdType.AUTO)  xml文件配置全局的
+public class Employee extends Model<Employee> {
 
     private Integer id;
-
-    //@TableField("last_name")  如果未开启驼峰，则启用该注解
 
     private String lastName;
     private String email;
@@ -36,6 +35,11 @@ public class Employee {
 
 
     public Employee() {
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return id;
     }
 
 

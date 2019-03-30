@@ -1,8 +1,10 @@
-package com.hx.mp.test;
+package com.hx.mp1.test;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.hx.mp.bean.Employee;
-import com.hx.mp.mapper.EmployeeMapper;
+import com.hx.mp1.bean.Employee;
+import com.hx.mp1.mapper.EmployeeMapper;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,13 +24,51 @@ public class BootStrap {
 
     private EmployeeMapper mapper = context.getBean("employeeMapper", EmployeeMapper.class);
 
+    /**
+     * 通过条件构造器，条件删除操作
+     */
+    @Test
+    public void testEntitySelectList(){
+        List<Employee> employees = mapper.selectList(new EntityWrapper<Employee>()
+                .eq("gender", 0)
+                .orderBy("age"));
+        System.out.println(employees);
+    }
 
 
 
     /**
+     * 通过条件构造器，条件删除操作
+     */
+    @Test
+    public void testEntityWrapperDel(){
+        mapper.delete(new EntityWrapper<Employee>().eq("age",10));
+    }
+
+
+
+
+
+    /**
+     * 通过条件构造器，分页条件查询操作
+     */
+    @Test
+    public void testEntityWrapperSelect(){
+        List<Employee> employees = mapper.selectPage(new Page<Employee>(1, 1), new EntityWrapper<Employee>()
+                .between("age", 18, 50)
+                .eq("gender", 1)
+                /*.eq("last_name", "Tome")*/
+                /*.like("last_name", "Tome")*/
+                /*.or("last_name", "Tome")*/
+                /*.eq("last_name", "Tome")*/
+                );
+        System.out.println(employees);
+    }
+
+    /**
      * 通用删除操作
      */
-    @org.junit.Test
+    @Test
     public void testDel(){
         //根据id删除
 //        Integer res = mapper.deleteById(13);
@@ -53,7 +93,7 @@ public class BootStrap {
     /**
      * 通用查询操作
      */
-    @org.junit.Test
+    @Test
     public void testQuery() {
         //通过id查询
         //Employee employee = mapper.selectById(9);
@@ -91,7 +131,7 @@ public class BootStrap {
     /**
      * 通用更新操作
      */
-    @org.junit.Test
+    @Test
     public void testUpdate() {
         Employee employee = new Employee();
         employee.setId(12);
@@ -107,7 +147,7 @@ public class BootStrap {
      * @throws SQLException
      */
 
-    @org.junit.Test
+    @Test
     public void testInsert() throws SQLException {
         Employee employee = new Employee();
         employee.setLastName("陈");
@@ -132,7 +172,7 @@ public class BootStrap {
 
     //测试环境是否配置正确
 
-    @org.junit.Test
+    @Test
     public void testEnvironment() throws SQLException {
         DataSource dataSource = context.getBean("dataSource", DataSource.class);
         Connection con = dataSource.getConnection();

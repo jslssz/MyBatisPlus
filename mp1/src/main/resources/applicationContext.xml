@@ -37,7 +37,7 @@
         <property name="configLocation" value="classpath:mybatis-conf.xml"></property>
         <!-- 别名处理 -->
         <property name="typeAliasesPackage"
-                  value="com.hx.mp.bean"></property>
+                  value="com.hx.mp1.bean"></property>
 
         <!--注入全局配置-->
         <property name="globalConfig" ref="globalConfiguration"/>
@@ -60,6 +60,6 @@
     -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage"
-                  value="com.hx.mp.mapper"></property>
+                  value="com.hx.mp1.mapper"></property>
     </bean>
 </beans>
